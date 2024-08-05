@@ -11,17 +11,15 @@ function App() {
       .then((r) => r.json())
       .then((data) => {
         setListings(data);
-      })
-      .then(() => {
-        setSearchedListings(listings);
+        setSearchedListings(data);
       });
   }, []);
 
   function onDeleteListing(deletedListing) {
-    const updatedListing = listings.filter(
-      (listing) => listing.id !== deletedListing.id
+    setListings(listings.filter((listing) => listing.id !== deletedListing.id));
+    setSearchedListings(
+      searchedListings.filter((listing) => listing.id !== deletedListing.id)
     );
-    setListings(updatedListing);
   }
 
   function onSearchFormSubmit(key) {
